@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Safely access process.env to avoid ReferenceError in browser environments that don't polyfill 'process'
 const getApiKey = () => {
@@ -30,20 +30,18 @@ export const generateHypeMessage = async (nickname: string, nominations: string[
 
   try {
     // Instantiate client here to prevent top-level crashes
-    const ai = new GoogleGenAI({ apiKey });
+    const ai = new GoogleGenerativeAI(apiKey);
     
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: `
-        Generate a short, energetic, hype-up welcome message (max 2 sentences) in Russian 
-        for a dancer named "${nickname}" who just registered for the "${nominationStr}" categories 
-        at the "Йолка" (Yolka) street dance festival. 
-        Use slang appropriate for hip-hop/breaking culture. 
-        Don't use quotes.
-      `,
-    });
+    const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const result = await model.generateContent(`
+      Generate a short, energetic, hype-up welcome message (max 2 sentences) in Russian 
+      for a dancer named "${nickname}" who just registered for the "${nominationStr}" categories 
+      at the "Йолка" (Yolka) street dance festival. 
+      Use slang appropriate for hip-hop/breaking culture. 
+      Don't use quotes.
+    `);
 
-    return response.text.trim();
+    return result.response.text().trim();
   } catch (error) {
     console.error("Gemini API Error:", error);
     return `Йо, ${nickname}! Твоя заявка принята. Порви всех в категориях: ${nominationStr}!`;
