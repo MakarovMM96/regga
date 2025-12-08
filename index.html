@@ -30,21 +30,26 @@
         window.process = { env: {} };
       }
     </script>
-    <script type="importmap">
-    {
-      "imports": {
-        "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.1/client",
-        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-        "react/": "https://aistudiocdn.com/react@^19.2.1/",
-        "react": "https://aistudiocdn.com/react@^19.2.1",
-        "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
-        "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
-        "xlsx": "https://esm.sh/xlsx@0.18.5"
-      }
-    }
+    <!-- CDN Imports -->
+    <script src="https://unpkg.com/react@19.2.1/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@19.2.1/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/lucide@0.556.0/dist/umd/lucide.js"></script>
+    <script src="https://unpkg.com/@google/generative-ai@0.22.0/dist/google-generative-ai.umd.min.js"></script>
+    <script src="https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script>
+      // Create global XLSX object
+      window.XLSX = XLSX;
+      
+      // Create global Lucide icons
+      const { User, MapPin, Hash, Calendar, GraduationCap, Loader2, CheckCircle, Sparkles, Phone, Link: LinkIcon, Trophy, Check } = lucide;
+      window.LucideIcons = { User, MapPin, Hash, Calendar, GraduationCap, Loader2, CheckCircle, Sparkles, Phone, LinkIcon, Trophy, Check };
+      
+      // Create global Google Generative AI
+      window.GoogleGenerativeAI = googleGenerativeAI;
     </script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
+    <script type="module" src="/index.jsx"></script>
   </body>
 </html>
