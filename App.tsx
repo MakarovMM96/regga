@@ -21,8 +21,6 @@ const App: React.FC = () => {
     if (!formData.nickname.trim()) newErrors.nickname = "Введите никнейм";
     if (!formData.birthDate) newErrors.birthDate = "Выберите дату рождения";
     if (!formData.teacher.trim()) newErrors.teacher = "Введите педагога";
-    if (!formData.phone.trim()) newErrors.phone = "Введите номер телефона";
-    if (!formData.vkLink.trim()) newErrors.vkLink = "Введите ссылку на ВК";
     if (formData.nomination.length === 0) newErrors.nomination = "Выберите хотя бы одну номинацию";
 
     setErrors(newErrors);
