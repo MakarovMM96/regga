@@ -5,11 +5,15 @@ const getApiKey = () => {
   try {
     // Check if process is defined to avoid ReferenceError
     if (typeof process !== 'undefined' && process.env) {
-      return process.env.API_KEY || '';
+      return process.env.VITE_GEMINI_API_KEY || '';
+    }
+    // For Vite environment, use import.meta.env
+    if (typeof import.meta !== 'undefined' && import.meta.env) {
+      return import.meta.env.VITE_GEMINI_API_KEY || '';
     }
     return '';
   } catch (error) {
-    console.warn("process.env is not defined, running without API key");
+    console.warn("Environment variables are not accessible");
     return '';
   }
 };

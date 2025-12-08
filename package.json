@@ -1,7 +1,7 @@
 {
-  "name": "copy-of-copy-of-copy-of-copy-of-yolka-fest-registration",
+  "name": "yolka-fest-registration",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

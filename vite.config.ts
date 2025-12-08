@@ -6,10 +6,21 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
   return {
-    base: '/', // <<< ВАЖНО для корректной загрузки ассетов
+    base: './', // For GitHub Pages deployment (relative paths)
     server: {
       port: 3000,
       host: '0.0.0.0',
+    },
+    build: {
+      outDir: 'dist',
+      sourcemap: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+          }
+        }
+      }
     },
     plugins: [react()],
     define: {
